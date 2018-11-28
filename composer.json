@@ -1,0 +1,13 @@
+{
+  "name": "conradfuhrman/seo-to-api",
+  "description": "Expose the meta of the SEO Framework to the WP API",
+  "type": "wordpress-plugin",
+  "license": "GPL-3.0",
+  "require": {
+    "php": ">=7.0",
+    "composer/installers": "~1.0"
+  },
+  "extra": {
+    "installer-name": "seo-to-api"
+  }
+}
