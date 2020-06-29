@@ -3,7 +3,7 @@
  * Plugin Name:       SEO to API
  * Plugin URI:        https://github.com/conradfuhrman/SEO-To-API
  * Description:       Expose the meta of the SEO Framework to the WP API
- * Version:           1.0
+ * Version:           1.1
  * Author:            Conrad Fuhrman
  * Author URI:        https://github.com/conradfuhrman/
  *
@@ -19,20 +19,43 @@ add_action( 'rest_api_init', function() {
     'show_in_rest' => true,
   ];
 
-  register_meta('post', '_genesis_title', $str);
-  register_meta('post', '_genesis_description', $str);
-  register_meta('post', '_genesis_canonical_uri', $str);
-  register_meta('post', 'redirect', $str);
-  register_meta('post', '_social_image_url', $str);
-  register_meta('post', '_social_image_id', $str);
-  register_meta('post', '_genesis_noindex', $str);
-  register_meta('post', '_genesis_nofollow', $str);
-  register_meta('post', '_genesis_noarchive', $str);
-  register_meta('post', 'exclude_local_search', $str);
-  register_meta('post', 'exclude_from_archive', $str);
-  register_meta('post', '_open_graph_title', $str);
-  register_meta('post', '_open_graph_description', $str);
-  register_meta('post', '_twitter_title', $str);
-  register_meta('post', '_twitter_description', $str);
+  $args = [
+    'name' => $_REQUEST['slug'],
+    'post_type'   => 'page',
+    'post_status' => 'publish',
+    'numberposts' => 1
+  ];
+
+  $post = get_posts($args)[0];
+
+
+
+  register_rest_field(['post', 'page', 'work'], 'meta_title', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_title($post->ID); }
+  ]);
+
+  register_rest_field(['post', 'page', 'work'], 'meta_description', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_description($post->ID); }
+  ]);
+
+  register_rest_field(['post', 'page', 'work'], 'meta_social_image_url', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_image_from_cache($post->ID); }
+  ]);
+
+  register_rest_field(['post', 'page', 'work'], 'meta_open_graph_title', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_open_graph_title($post->ID); }
+  ]);
+
+  register_rest_field(['post', 'page', 'work'], 'meta_open_graph_description', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_open_graph_description($post->ID); }
+  ]);
+
+  register_rest_field(['post', 'page', 'work'], 'meta_twitter_title', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_twitter_title($post->ID); }
+  ]);
+
+  register_rest_field(['post', 'page', 'work'], 'meta_twitter_description', [
+    'get_callback' => function () use ($post) { return the_seo_framework()->get_twitter_description($post->ID); }
+  ]);
 
 });
