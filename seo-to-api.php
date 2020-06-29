@@ -31,31 +31,31 @@ add_action( 'rest_api_init', function() {
 
 
   register_rest_field(['post', 'page', 'work'], 'meta_title', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_title($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_title($post->ID)); }
   ]);
 
   register_rest_field(['post', 'page', 'work'], 'meta_description', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_description($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_description($post->ID)); }
   ]);
 
   register_rest_field(['post', 'page', 'work'], 'meta_social_image_url', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_image_from_cache($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_image_from_cache($post->ID)); }
   ]);
 
   register_rest_field(['post', 'page', 'work'], 'meta_open_graph_title', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_open_graph_title($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_open_graph_title($post->ID)); }
   ]);
 
   register_rest_field(['post', 'page', 'work'], 'meta_open_graph_description', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_open_graph_description($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_open_graph_description($post->ID)); }
   ]);
 
   register_rest_field(['post', 'page', 'work'], 'meta_twitter_title', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_twitter_title($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_twitter_title($post->ID)); }
   ]);
 
   register_rest_field(['post', 'page', 'work'], 'meta_twitter_description', [
-    'get_callback' => function () use ($post) { return the_seo_framework()->get_twitter_description($post->ID); }
+    'get_callback' => function () use ($post) { return html_entity_decode(the_seo_framework()->get_twitter_description($post->ID)); }
   ]);
 
 });
