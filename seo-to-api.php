@@ -21,7 +21,7 @@ add_action( 'rest_api_init', function() {
 
   $args = [
     'name' => $_REQUEST['slug'],
-    'post_type'   => 'page',
+    'post_type'   => ['post', 'page', 'work'],
     'post_status' => 'publish',
     'numberposts' => 1
   ];
